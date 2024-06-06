@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { motion, useScroll } from "framer-motion"
 import "./header.css";
 
 const Header = () => {
+    const { scrollYProgress } = useScroll();
     window.addEventListener("scroll",function(){
         const header=this.document.querySelector(".header");
         if (this.scrollY >= 560) 
@@ -11,10 +13,11 @@ const Header = () => {
     })
       const[Toggle,showMenu] = useState(false);
       const[activeNav,setActiveNav]=useState("#home")
-    return(
+    return(<>
+        <motion.div style={{ scaleX: scrollYProgress }} /> 
         <header className="header">
             <nav className="nav container">
-                <a href="index.html" className="nav__logo">Lohith</a>
+                <a href="#home" className="nav__logo">Lohith</a>
 
                 <div className={Toggle ? "nav__menu show-menu" :"nav__menu"}>
                     <ul className="nav__list grid">
@@ -68,6 +71,7 @@ const Header = () => {
                 </div>
             </nav>
         </header>
+        </>
     )
 } 
 export default Header
